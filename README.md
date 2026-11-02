@@ -2,7 +2,8 @@
 
 A lock-screen music player for macOS. While Spotify or Apple Music is playing, Coverlock
 puts the album cover across your lock screen with the track, a progress bar,
-⏮ ⏯ ⏭ controls and time-synced lyrics.
+⏮ ⏯ ⏭ controls and, if you want them, time-synced lyrics. It only changes the lock screen:
+your desktop wallpaper is never touched.
 
 ![Coverlock on the lock screen](docs/screenshot.jpg)
 
@@ -38,8 +39,8 @@ Everything lives in the ♪ menu-bar icon:
 | Menu item | What it does |
 |---|---|
 | Show on lock screen | Turns the lock-screen player on or off |
-| Show lyrics | Time-synced lyrics from [LRCLIB](https://lrclib.net) |
-| Background | **Album art as wallpaper** (swaps your wallpaper for the blurred cover while music plays and restores it afterwards), **Album art overlay**, or **Keep my wallpaper** |
+| Show lyrics | Time-synced lyrics from [LRCLIB](https://lrclib.net) beside the cover. Off, the cover sits centred with the song name underneath |
+| Background | **Album art overlay** (the blurred cover fills the lock screen, fading out above the password field) or **Keep my wallpaper** (only the player is shown). Neither changes your desktop |
 | Preview for 10 seconds | Shows the player over your desktop without locking |
 | Open at login | Starts Coverlock automatically |
 

@@ -9,8 +9,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         Settings.register()
-        // Puts the wallpaper back if Coverlock quit while the Mac was locked.
-        Wallpaper.shared.restore()
         nowPlaying.start()
         lyrics.start()
         lockScreen.start()
@@ -19,7 +17,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         DistributedNotificationCenter.default().addObserver(
             forName: .init("com.krabduke.coverlock.preview"), object: nil, queue: .main
         ) { [weak self] _ in self?.lockScreen.preview() }
-        // `scripts/snapshot.sh <path> [overlay|wallpaper|off]` renders the player to a PNG.
+        // `scripts/snapshot.sh <path> [overlay|off]` renders the player to a PNG.
         DistributedNotificationCenter.default().addObserver(
             forName: .init("com.krabduke.coverlock.snapshot"), object: nil, queue: .main
         ) { [weak self] note in
@@ -36,10 +34,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         let menu = NSMenu()
         menu.delegate = self
         statusItem.menu = menu
-    }
-
-    func applicationWillTerminate(_ notification: Notification) {
-        Wallpaper.shared.restore()
     }
 
     // MARK: Menu

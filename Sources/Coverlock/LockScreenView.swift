@@ -93,6 +93,43 @@ private struct Player: View {
     let coverSize: CGFloat
 
     var body: some View {
+        if showLyrics && !lyrics.lines.isEmpty {
+            withLyrics
+        } else {
+            centered
+        }
+    }
+
+    /// No lyrics: one centred column, cover on top and the song name underneath.
+    private var centered: some View {
+        // A touch smaller than with lyrics, so the taller column clears the clock above
+        // and the password field below.
+        let coverSize = coverSize * 0.9
+        return VStack(spacing: 0) {
+            Cover(image: nowPlaying.artwork, size: coverSize)
+            VStack(spacing: 6) {
+                Text(track.title)
+                    .font(.system(size: 30, weight: .bold, design: .rounded))
+                    .lineLimit(1)
+                Text(track.artist)
+                    .font(.system(size: 19, weight: .medium, design: .rounded))
+                    .opacity(0.7)
+                    .lineLimit(1)
+            }
+            .multilineTextAlignment(.center)
+            .frame(width: coverSize * 1.6)
+            .padding(.top, 30)
+            Progress(nowPlaying: nowPlaying, duration: track.duration)
+                .frame(width: coverSize)
+                .padding(.top, 22)
+            Controls(nowPlaying: nowPlaying)
+                .padding(.top, 10)
+        }
+        .shadow(color: .black.opacity(0.25), radius: 10, y: 2)
+    }
+
+    /// Lyrics on: cover and controls on the left, song name and lyrics on the right.
+    private var withLyrics: some View {
         HStack(alignment: .center, spacing: coverSize * 0.18) {
             VStack(spacing: 20) {
                 Cover(image: nowPlaying.artwork, size: coverSize)

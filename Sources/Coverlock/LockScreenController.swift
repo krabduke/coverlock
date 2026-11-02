@@ -34,10 +34,6 @@ final class LockScreenController {
             .receive(on: RunLoop.main)
             .sink { [weak self] _ in self?.trackChanged() }
             .store(in: &subscriptions)
-        nowPlaying.$artwork
-            .receive(on: RunLoop.main)
-            .sink { [weak self] _ in self?.artworkChanged() }
-            .store(in: &subscriptions)
     }
 
     /// Shows the lock screen player over the desktop for a few seconds, without locking.
@@ -99,20 +95,11 @@ final class LockScreenController {
         }
     }
 
-    private func artworkChanged() {
-        guard isActive, !windows.isEmpty, Settings.backdrop == .wallpaper,
-              let artwork = nowPlaying.artwork else { return }
-        Wallpaper.shared.apply(artwork)
-    }
-
     private func present(onLockScreen: Bool) {
         guard Settings.enabled, windows.isEmpty, nowPlaying.track != nil else { return }
         if onLockScreen && !SkyLight.shared.isAvailable { return }
 
         let backdrop = Settings.backdrop
-        if backdrop == .wallpaper, let artwork = nowPlaying.artwork {
-            Wallpaper.shared.apply(artwork)
-        }
 
         for screen in NSScreen.screens {
             let window = LockScreenWindow(screen: screen)
@@ -139,7 +126,6 @@ final class LockScreenController {
             window.close()
         }
         windows = []
-        Wallpaper.shared.restore()
     }
 }
 

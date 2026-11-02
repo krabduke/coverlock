@@ -1,9 +1,9 @@
 import Foundation
 
+/// Coverlock never touches the desktop wallpaper: everything it shows lives in its own
+/// lock-screen window, so the desktop is the same before and after locking. (v0.1 swapped the
+/// real wallpaper while locked; a saved "wallpaper" setting now falls back to `.overlay`.)
 enum Backdrop: String, CaseIterable {
-    /// Swap the real wallpaper for the blurred cover while locked, so the system clock and
-    /// password field draw on top of it natively.
-    case wallpaper
     /// Draw the blurred cover in our own lock-screen window. Covers the system clock, so we
     /// draw our own, and fades out at the bottom so the password field stays visible.
     case overlay
@@ -12,7 +12,6 @@ enum Backdrop: String, CaseIterable {
 
     var title: String {
         switch self {
-        case .wallpaper: "Album art as wallpaper"
         case .overlay: "Album art overlay"
         case .off: "Keep my wallpaper"
         }
@@ -25,7 +24,7 @@ enum Settings {
     static func register() {
         defaults.register(defaults: [
             "enabled": true,
-            "backdrop": Backdrop.wallpaper.rawValue,
+            "backdrop": Backdrop.overlay.rawValue,
             "lyrics": true,
         ])
     }
@@ -36,7 +35,7 @@ enum Settings {
     }
 
     static var backdrop: Backdrop {
-        get { Backdrop(rawValue: defaults.string(forKey: "backdrop") ?? "") ?? .wallpaper }
+        get { Backdrop(rawValue: defaults.string(forKey: "backdrop") ?? "") ?? .overlay }
         set { defaults.set(newValue.rawValue, forKey: "backdrop") }
     }
 
