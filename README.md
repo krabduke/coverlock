@@ -14,16 +14,18 @@ On a new Mac, paste this into Terminal:
 curl -fsSL https://raw.githubusercontent.com/krabduke/coverlock/main/install.sh | zsh
 ```
 
-It installs **Coverlock** and **[Boring Notch](https://github.com/TheBoredTeam/boring.notch)**
-(a free Dynamic Island for the notch) and opens both. Add `-s -- --coverlock-only` after `zsh`
-to skip Boring Notch.
+It installs **Coverlock**, **[Faders](https://github.com/krabduke/faders)** (per-app volume
+from the menu bar) and **[Boring Notch](https://github.com/TheBoredTeam/boring.notch)** (a free
+Dynamic Island for the notch), and opens them. Add `-s -- --coverlock-only` after `zsh` to
+install just Coverlock.
 
 Then:
 
 1. **Turn on login items**, or the apps won't come back after a restart: tick
-   **Open at login** in Coverlock's ♪ menu, and **Launch at login** in Boring Notch's
-   settings (⭐ menu).
-2. **Allow the permission prompts.** Coverlock asks to control Spotify / Music. Boring
+   **Open at login** in Coverlock's ♪ menu and at the bottom of the Faders panel, and
+   **Launch at login** in Boring Notch's settings (⭐ menu).
+2. **Allow the permission prompts.** Coverlock asks to control Spotify / Music. Faders asks
+   for "Screen & System Audio Recording" the first time you change an app's volume. Boring
    Notch asks for Accessibility, which macOS 27 calls "Device Control and Data Access".
 
 The prebuilt download runs on Apple Silicon Macs with macOS 14 or later. On an Intel Mac,
