@@ -20,12 +20,9 @@ struct LockScreenView: View {
                     // screen so it doesn't stretch the stack and push everything up.
                     .frame(width: size.width, height: size.height)
                     .clipped()
-                    // Fade out over the password field so it stays visible and clickable.
-                    .mask(LinearGradient(stops: [
-                        .init(color: .black, location: 0),
-                        .init(color: .black, location: 0.72),
-                        .init(color: .clear, location: 0.84),
-                    ], startPoint: .top, endPoint: .bottom))
+                    // Full screen, edge to edge. This window sits above the system lock
+                    // screen, so the password field is hidden underneath; typing still goes to
+                    // it (this window never takes keystrokes) and Touch ID still works.
                 // The overlay hides the system clock, so draw one in its place.
                 LockClock(height: size.height)
                     .position(x: size.width / 2, y: size.height * 0.15)
@@ -34,7 +31,9 @@ struct LockScreenView: View {
                 Player(track: track, nowPlaying: nowPlaying, lyrics: lyrics,
                        showLyrics: showLyrics, coverSize: min(size.height * 0.3, 380))
                     .frame(maxWidth: min(size.width * 0.8, 1040))
-                    .position(x: size.width / 2, y: size.height * 0.5)
+                    // With the overlay nothing sits at the bottom, so centre the player in the
+                    // space under the clock. Otherwise keep it clear of the password field.
+                    .position(x: size.width / 2, y: size.height * (backdrop == .overlay ? 0.58 : 0.5))
                     .transition(.opacity)
             }
         }

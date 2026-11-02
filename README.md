@@ -40,7 +40,7 @@ Everything lives in the ♪ menu-bar icon:
 |---|---|
 | Show on lock screen | Turns the lock-screen player on or off |
 | Show lyrics | Time-synced lyrics from [LRCLIB](https://lrclib.net) beside the cover. Off, the cover sits centred with the song name underneath |
-| Background | **Album art overlay** (the blurred cover fills the lock screen, fading out above the password field) or **Keep my wallpaper** (only the player is shown). Neither changes your desktop |
+| Background | **Album art overlay** (the blurred cover fills the whole lock screen. It also covers the password field: just type your password and press Return, or use Touch ID) or **Keep my wallpaper** (only the player is shown). Neither changes your desktop |
 | Preview for 10 seconds | Shows the player over your desktop without locking |
 | Open at login | Starts Coverlock automatically |
 

@@ -4,8 +4,8 @@ import Foundation
 /// lock-screen window, so the desktop is the same before and after locking. (v0.1 swapped the
 /// real wallpaper while locked; a saved "wallpaper" setting now falls back to `.overlay`.)
 enum Backdrop: String, CaseIterable {
-    /// Draw the blurred cover in our own lock-screen window. Covers the system clock, so we
-    /// draw our own, and fades out at the bottom so the password field stays visible.
+    /// Draw the blurred cover in our own lock-screen window. Covers the whole lock screen,
+    /// including the system clock (so we draw our own) and the password field.
     case overlay
     /// Leave the lock-screen background alone and only show the player.
     case off
